@@ -8,13 +8,26 @@ using IMO.BookService.App.Models;
 
 namespace IMO.BookService.App
 {
+    /// <summary>
+    /// A command line utility that allows for access and modification to a books data set.
+    /// Utility currently only supports dataset generation and dataset fetching.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
-            var books = FetchAllBooks();
-            var output = JsonConvert.SerializeObject(books, Formatting.Indented);
-            Console.WriteLine(output);
+            if (args.Length == 1 && args[0] == "-g")
+            {
+                var books = GenerateSampleBooks(15);
+                var output = JsonConvert.SerializeObject(books, Formatting.Indented);
+                File.WriteAllText("Samples\\data.json", output);
+            }
+            else
+            {
+                var books = FetchAllBooks();
+                var output = JsonConvert.SerializeObject(books, Formatting.Indented);
+                Console.WriteLine(output);
+            }
         }
 
         static Book[] FetchAllBooks()
@@ -65,9 +78,30 @@ namespace IMO.BookService.App
             return sampleBooks.ToArray();
         }
 
-        static void GetAuthors()
+        /// <summary>
+        /// Feature-Request: Clients want to be able to display the names of the Authors we support.
+        /// </summary>
+        static string[] GetAuthors()
         {
+            return new string[0];
+        }
 
+        /// <summary>
+        /// Feature-Request: Clients want to be able to search for books by a certain author.
+        /// </summary>
+        /// <returns></returns>
+        static Book[] GetBooksByAuthorName()
+        {
+            return new Book[0];
+        }
+
+        /// <summary>
+        /// Feature-Request: Clients want to be able to search for books within a genre.
+        /// </summary>
+        /// <returns></returns>
+        static Book[] GetBooksByGenre()
+        {
+            return new Book[0];
         }
     }
 }
