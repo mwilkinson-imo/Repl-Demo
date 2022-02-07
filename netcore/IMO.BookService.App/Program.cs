@@ -12,41 +12,58 @@ namespace IMO.BookService.App
     {
         static void Main(string[] args)
         {
-            var bookAuthors = GetBookAuthors();
-            Console.WriteLine($"Read data. Found {bookAuthors.Items.Length} entries");
-            Console.WriteLine("Aggregating author info.");
-            var authors = GetAuthors(bookAuthors);
-            var output = JsonConvert.SerializeObject(authors, Formatting.Indented);
-            Console.WriteLine("Aggregation done:" + Environment.NewLine + Environment.NewLine);
-            Console.WriteLine(output);
+            var books = GenerateSampleBooks(15);
+            var output = JsonConvert.SerializeObject(books, Formatting.Indented);
+            File.WriteAllText("Samples/data.json", output);
             Console.ReadLine();
         }
 
-        static BookAuthors GetBookAuthors()
+        static Book[] FetchAllBooks()
         {
             var text = File.ReadAllText("Samples\\data.json");
-            var bookAuthors = JsonConvert.DeserializeObject<BookAuthors>(text);
-            return bookAuthors;
+            var books = JsonConvert.DeserializeObject<Book[]>(text);
+            return books;
         }
 
-        static List<Author> GetAuthors(BookAuthors bookAuthors)
+        static Book[] GenerateSampleBooks(int numberOfBooks)
         {
-            var authors = new List<Author>();
-            var uniqueGroups = bookAuthors.Items.GroupBy(x => x.Author);
-            foreach (var grouping in uniqueGroups)
+            var sampleBooks = new List<Book>();
+            var random = new Random();
+            for (var i = 0; i < numberOfBooks; i++)
             {
-                var author = new Author();
-                author.Name = grouping.Key;
-                foreach (var authorBook in grouping)
-                {
-                    author.Books.Add(authorBook.Title);
-                    author.Genres.AddRange(authorBook.Genres);
-                }
-                author.Genres = author.Genres.Distinct().ToList();
-                authors.Add(author);
-            }
+                var sampleBook = new Book();
+                var firstNames = new[] { "Alisha", "Harris", "Mike", "Reynard", "Amy", "Charise", "A. B.", "Rudiger" };
+                var authorFirstName = firstNames[random.Next(firstNames.Length)];
 
-            return authors;
+                var lastNames = new[] { "Jones", "McGee", "Smith", "Chandler", "Charlot", "Ali" };
+                var authorLastName = lastNames[random.Next(lastNames.Length)];
+
+                sampleBook.Author = $"{authorFirstName} {authorLastName}";
+
+                var genres = new[] { "Fiction", "Thriller", "True Crime", "Non-Fiction", "Graphic Novel", "Children's" };
+                var selectedGenres = genres.OrderBy(x => random.Next()).Take(2);
+
+                sampleBook.Genres.AddRange(selectedGenres);
+
+                var modifiers = new[] { "The", "That", "This" , "The Only", "The First", "The Last"};
+                var modifier = modifiers[random.Next(modifiers.Length)];
+
+                var adjectives = new[] { "Happy", "Hungry", "Sad", "Grumpy", "Sleepy", "Nervous", "Ornery" };
+                var adjective = adjectives[random.Next(adjectives.Length)];
+
+                var animals = new[] { "Falcon", "Deer", "Coyote", "Rabbit", "Squirrel", "Cat", "Dog", "Iguana", "Chinchilla" };
+                var animal = animals[random.Next(animals.Length)];
+
+                sampleBook.Title = $"{modifier} {adjective} {animal}";
+                sampleBooks.Add(sampleBook);
+            }
+            return sampleBooks.ToArray();
+        }
+
+
+        static void GetAuthors()
+        {
+
         }
     }
 }
