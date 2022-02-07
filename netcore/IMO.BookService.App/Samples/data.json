@@ -1,0 +1,34 @@
+{
+  "BookAuthors": [
+    {
+      "BookTitle": "Limitations",
+      "Author": "E. F. Benson",
+      "Genres": [ "fiction", "thriller" ]
+    },
+    {
+      "BookTitle": "Impediments",
+      "Author": "E. F. Benson",
+      "Genres": [ "true crime", "thriller" ]
+    },
+    {
+      "BookTitle": "Buster",
+      "Author": "George Ethelbert Walsh",
+      "Genres": [ "fiction", "thriller" ]
+    },
+    {
+      "BookTitle": "Walking essays",
+      "Author": "Arthur Sidgwick",
+      "Genres": [ "fiction", "thriller" ]
+    },
+    {
+      "BookTitle": "Doctor Rabbit and Ki-Yi Coyote",
+      "Author": "Thomas Clark Hinkle",
+      "Genres": [ "fiction", "thriller" ]
+    },
+    {
+      "BookTitle": "The early life of Abraham Lincoln",
+      "Author": "Ida M. Tarbell",
+      "Genres": [ "fiction", "thriller" ]
+    }
+  ]
+}
