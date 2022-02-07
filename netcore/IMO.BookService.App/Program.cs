@@ -5,7 +5,6 @@ using System.Linq;
 using Newtonsoft.Json;
 using IMO.BookService.App.Models;
 
-
 namespace IMO.BookService.App
 {
     /// <summary>
@@ -20,7 +19,7 @@ namespace IMO.BookService.App
             {
                 var books = GenerateSampleBooks(15);
                 var output = JsonConvert.SerializeObject(books, Formatting.Indented);
-                File.WriteAllText("Samples\\data.json", output);
+                File.WriteAllText("Samples/data.json", output);
             }
             else
             {
@@ -32,7 +31,7 @@ namespace IMO.BookService.App
 
         static Book[] FetchAllBooks()
         {
-            var text = File.ReadAllText("Samples\\data.json");
+            var text = File.ReadAllText("Samples/data.json");
             var books = JsonConvert.DeserializeObject<Book[]>(text);
             return books;
         }
@@ -63,7 +62,7 @@ namespace IMO.BookService.App
 
                 sampleBook.Genres.AddRange(selectedGenres);
 
-                var modifiers = new[] { "The", "That", "This" , "The Only", "The First", "The Last"};
+                var modifiers = new[] { "The", "That", "This", "The Only", "The First", "The Last" };
                 var modifier = modifiers[random.Next(modifiers.Length)];
 
                 var adjectives = new[] { "Happy", "Hungry", "Sad", "Grumpy", "Sleepy", "Nervous", "Ornery" };
