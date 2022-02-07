@@ -12,10 +12,9 @@ namespace IMO.BookService.App
     {
         static void Main(string[] args)
         {
-            var books = GenerateSampleBooks(15);
+            var books = FetchAllBooks();
             var output = JsonConvert.SerializeObject(books, Formatting.Indented);
-            File.WriteAllText("Samples/data.json", output);
-            Console.ReadLine();
+            Console.WriteLine(output);
         }
 
         static Book[] FetchAllBooks()
@@ -25,6 +24,12 @@ namespace IMO.BookService.App
             return books;
         }
 
+        /// <summary>
+        /// Function for generating sample book data. 
+        /// All books include a generated AuthorName, Title, and 2 Genres.
+        /// </summary>
+        /// <param name="numberOfBooks"></param>
+        /// <returns></returns>
         static Book[] GenerateSampleBooks(int numberOfBooks)
         {
             var sampleBooks = new List<Book>();
@@ -59,7 +64,6 @@ namespace IMO.BookService.App
             }
             return sampleBooks.ToArray();
         }
-
 
         static void GetAuthors()
         {
