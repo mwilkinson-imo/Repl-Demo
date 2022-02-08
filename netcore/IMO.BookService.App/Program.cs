@@ -86,6 +86,14 @@ namespace IMO.BookService.App
         }
 
         /// <summary>
+        /// Feature-Request: Our support teams want to be able to add new books we support to our data store.
+        /// </summary>
+        static void AddBook(/*Intentionally blank*/)
+        {
+            return;
+        }
+
+        /// <summary>
         /// Feature-Request: Clients want to be able to search for books by a certain author.
         /// </summary>
         /// <returns></returns>
